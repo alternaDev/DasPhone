@@ -9,13 +9,18 @@
 #include "time.h"
 #include "tel.h"
 #include "keypad.h"
+#include "delay.h"
 
 //extern int sprintf(char *buf, const char *fmt, ...);
 
 int main(void) {
- 	SystemInit();
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOC, ENABLE);
+	SystemInit();
+	Delay_Init();
+
+	RCC_APB2PeriphClockCmd(
+			RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOB
+					| RCC_APB2Periph_GPIOC, ENABLE);
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_StructInit(&GPIO_InitStructure);
@@ -48,8 +53,7 @@ int main(void) {
 		RTC_SetTime(&time);
 	}
 
-	//Tel_Init();
-
+	Tel_Init();
 
 	while (1) {
 		RTC_GetTime(&time);
@@ -63,7 +67,7 @@ int main(void) {
 		OLED_Puts(buffer, &Font_7x10, 0xFF);
 
 		char key = Keys_GetKey();
-		if(key != NO_KEY) {
+		if (key != NO_KEY) {
 			OLED_Putc(key, &Font_7x10, 0xFF);
 		}
 

@@ -12,5 +12,7 @@ void PWR_Init();
 void USART1_Init(void);
 void Tel_Init();
 void TEL_IRQHandler();
+void Tel_On();
+void Tel_Off();
 
 #endif /* TEL_H_ */

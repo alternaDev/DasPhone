@@ -29,6 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_it.h"
+#include "delay.h"
 
 /** @addtogroup IO_Toggle
   * @{
@@ -140,6 +141,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+	Delay_SysTick();
 }
 
 /******************************************************************************/
